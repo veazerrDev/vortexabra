@@ -259,6 +259,7 @@ img {
     display: inline-block;
     transform-style: preserve-3d;
     perspective: 1000px;
+    transition: transform 0.1s ease-out;
 }
 
 .hero__logo {
