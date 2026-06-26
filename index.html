@@ -11,3 +11,142 @@
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vortexabra — українська студія Roblox</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container header__inner">
+            <a href="#" class="logo">Vortexabra</a>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="#about" class="nav__link">Про нас</a></li>
+                    <li><a href="#projects" class="nav__link">Проєкти</a></li>
+                    <li><a href="#social" class="nav__link">Соцмережі</a></li>
+                </ul>
+            </nav>
+            <div class="lang-switch">
+                <button class="lang-btn lang-btn--active" data-lang="uk">UA</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+            <button class="burger" aria-label="Меню">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container hero__inner">
+                <div class="hero__content">
+                    <h1 class="hero__title" data-i18n="hero.title">Vortexabra</h1>
+                    <p class="hero__subtitle" data-i18n="hero.subtitle">Українська спільнота розробників Roblox</p>
+                    <p class="hero__desc" data-i18n="hero.desc">Ми створюємо ігри рідною мовою, розвиваємо український сегмент Roblox, підтримуємо авторів та надихаємо нове покоління творців.</p>
+                    <div class="hero__actions">
+                        <a href="https://t.me/vortexabra" target="_blank" rel="noopener" class="btn btn--primary">Приєднатися</a>
+                        <a href="#projects" class="btn btn--outline">Наші проєкти</a>
+                    </div>
+                </div>
+                <div class="hero__visual">
+                    <div class="hero__shape"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="about section">
+            <div class="container">
+                <h2 class="section__title" data-i18n="about.title">Про нас</h2>
+                <div class="about__grid">
+                    <div class="about__card">
+                        <div class="about__icon">🎮</div>
+                        <h3 data-i18n="about.card1.title">Створюємо ігри</h3>
+                        <p data-i18n="about.card1.desc">Розробляємо захопливі ігрові проєкти на платформі Roblox українською мовою.</p>
+                    </div>
+                    <div class="about__card">
+                        <div class="about__icon">🌍</div>
+                        <h3 data-i18n="about.card2.title">Розвиваємо спільноту</h3>
+                        <p data-i18n="about.card2.desc">Об'єднуємо українських розробників, ділимося досвідом та підтримуємо один одного.</p>
+                    </div>
+                    <div class="about__card">
+                        <div class="about__icon">🚀</div>
+                        <h3 data-i18n="about.card3.title">Надихаємо</h3>
+                        <p data-i18n="about.card3.desc">Допомагаємо новачкам зробити перші кроки у світі геймдеву.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class="projects section">
+            <div class="container">
+                <h2 class="section__title" data-i18n="projects.title">Наші проєкти</h2>
+                <div class="projects__grid">
+                    <div class="project-card">
+                        <div class="project-card__image">
+                            <img src="https://via.placeholder.com/400x250/1a1a2e/e94560?text=ScriptForge" alt="ScriptForge">
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">ScriptForge</h3>
+                            <p class="project-card__desc" data-i18n="projects.scriptforge">Інструмент для написання сценаріїв Roblox з підтримкою української мови.</p>
+                            <a href="https://veazerrdev.github.io/ScriptForge/" target="_blank" rel="noopener" class="btn btn--small">Детальніше</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-card__image">
+                            <img src="https://via.placeholder.com/400x250/16213e/0f3460?text=Survive+the+Duolingo+Owl" alt="Survive the Duolingo Owl">
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">Survive the Duolingo Owl</h3>
+                            <p class="project-card__desc" data-i18n="projects.duolingo">Ховайтеся та тікайте від розлюченої сови Duolingo у цій захопливій грі на Roblox.</p>
+                            <a href="https://www.roblox.com/games/77856461499278/Survive-the-Duolingo-Owl" target="_blank" rel="noopener" class="btn btn--small">Грати</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social -->
+        <section id="social" class="social section">
+            <div class="container">
+                <h2 class="section__title" data-i18n="social.title">Соціальні мережі</h2>
+                <div class="social__grid">
+                    <a href="https://t.me/vortexabra" target="_blank" rel="noopener" class="social__item social__item--telegram">
+                        <span class="social__icon">✈️</span>
+                        <span class="social__name">Telegram</span>
+                    </a>
+                    <a href="https://disflip.com/guild/1509667234237382806" target="_blank" rel="noopener" class="social__item social__item--discord">
+                        <span class="social__icon">💬</span>
+                        <span class="social__name">Discord</span>
+                    </a>
+                    <a href="https://www.youtube.com/@Vortexabra" target="_blank" rel="noopener" class="social__item social__item--youtube">
+                        <span class="social__icon">▶️</span>
+                        <span class="social__name">YouTube</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@vortex_abra" target="_blank" rel="noopener" class="social__item social__item--tiktok">
+                        <span class="social__icon">🎵</span>
+                        <span class="social__name">TikTok</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <p class="footer__copy">&copy; 2026 Vortexabra. Усі права захищені.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
