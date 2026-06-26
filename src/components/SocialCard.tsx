@@ -1,6 +1,7 @@
 import { SocialLink } from '../data/siteData'
 
 interface SocialCardProps {
+  key?: string;
   link: SocialLink
 }
 
