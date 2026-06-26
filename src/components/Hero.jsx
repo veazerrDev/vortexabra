@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import VanillaTilt from 'vanilla-tilt';
 
 function Hero({ t }) {
+  const tiltRef = useRef(null);
+
+  useEffect(() => {
+    if (tiltRef.current) {
+      VanillaTilt.init(tiltRef.current, {
+        max: 15,
+        speed: 400,
+        glare: true,
+        'max-glare': 0.3,
+        scale: 1.05,
+      });
+    }
+    return () => {
+      if (tiltRef.current && tiltRef.current.vanillaTilt) {
+        tiltRef.current.vanillaTilt.destroy();
+      }
+    };
+  }, []);
+
   return (
     <section className="hero">
       <div className="container hero__inner">
@@ -14,7 +34,9 @@ function Hero({ t }) {
           </div>
         </div>
         <div className="hero__visual">
-          <img src="/src/assets/vortexabralogo.png" alt="Vortexabra logo" className="hero__logo" />
+          <div ref={tiltRef} className="hero__tilt-wrapper">
+            <img src="/src/assets/vortexabralogo.png" alt="Vortexabra logo" className="hero__logo" />
+          </div>
         </div>
       </div>
     </section>
