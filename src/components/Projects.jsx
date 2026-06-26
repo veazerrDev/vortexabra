@@ -7,14 +7,14 @@ function Projects({ t }) {
       descKey: 'projects.scriptforge',
       link: 'https://veazerrdev.github.io/ScriptForge/',
       linkKey: 'projects.scriptforge.link',
-      img: 'https://via.placeholder.com/400x250/1a1a2e/e94560?text=ScriptForge',
+      img: '/src/assets/scriptforge.png',
     },
     {
       title: 'Survive the Duolingo Owl',
       descKey: 'projects.duolingo',
       link: 'https://www.roblox.com/games/77856461499278/Survive-the-Duolingo-Owl',
       linkKey: 'projects.duolingo.link',
-      img: 'https://via.placeholder.com/400x250/16213e/0f3460?text=Survive+the+Duolingo+Owl',
+      img: '/src/assets/survive-the-duolingo-owl.png',
     },
   ];
 

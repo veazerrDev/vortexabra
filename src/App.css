@@ -405,6 +405,12 @@ img {
     font-size: 1.5rem;
 }
 
+.social__icon-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
 .social__name {
     font-weight: 600;
 }
