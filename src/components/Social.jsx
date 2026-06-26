@@ -5,7 +5,7 @@ function Social({ t }) {
     { icon: '/src/assets/telegram.png', name: 'Telegram', url: 'https://t.me/vortexabra' },
     { icon: '/src/assets/discord.png', name: 'Discord', url: 'https://disflip.com/guild/1509667234237382806' },
     { icon: '/src/assets/youtube.png', name: 'YouTube', url: 'https://www.youtube.com/@Vortexabra' },
-    { icon: '/src/assets/tiktok.png', name: 'TikTok', url: 'https://www.tiktok.com/@vortex_abra' },
+    { icon: '/src/assets/tiktok.webp', name: 'TikTok', url: 'https://www.tiktok.com/@vortex_abra' },
   ];
 
   return (

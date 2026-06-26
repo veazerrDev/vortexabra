@@ -7,7 +7,7 @@ function Projects({ t }) {
       descKey: 'projects.scriptforge',
       link: 'https://veazerrdev.github.io/ScriptForge/',
       linkKey: 'projects.scriptforge.link',
-      img: '/src/assets/scriptforge.png',
+      img: '/src/assets/scriptforge.jpg',
     },
     {
       title: 'Survive the Duolingo Owl',
