@@ -5,6 +5,7 @@ import About from './components/About';
 import Projects from './components/Projects';
 import Social from './components/Social';
 import Footer from './components/Footer';
+import Background3D from './components/Background3D';
 import translations from './i18n';
 import './App.css';
 
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <div className="app">
+      <Background3D />
       <Header lang={lang} setLang={setLang} t={t} />
       <main>
         <Hero t={t} />
