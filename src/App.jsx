@@ -1,12 +1,4 @@
-import React from 'react'
-
-const App = () => {
-  return (
-    <div>App</div>
-  )
-}
-
-export default Appimport React, { useState } from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
