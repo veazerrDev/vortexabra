@@ -1,4 +1,5 @@
 import React, { useRef, useCallback } from 'react';
+import vortexabralogo from "../assets/vortexabralogo.png"
 
 function Hero({ t }) {
   const tiltRef = useRef(null);
@@ -43,7 +44,7 @@ function Hero({ t }) {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
-            <img src="/src/assets/vortexabralogo.png" alt="Vortexabra logo" className="hero__logo" />
+            <img src={vortexabralogo} alt="Vortexabra logo" className="hero__logo" />
           </div>
         </div>
       </div>
