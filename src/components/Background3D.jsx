@@ -9,7 +9,7 @@ function Background3D() {
     if (!container) return;
 
     const scene = new THREE.Scene();
-    scene.background = null; // прозорий
+    scene.background = null;
 
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 5;
@@ -20,46 +20,71 @@ function Background3D() {
     container.appendChild(renderer.domElement);
 
     // Параметри
-    const PARTICLE_COUNT = 2000;
-    const CONNECT_DISTANCE = 0.15;
+    const PARTICLE_COUNT = 300;
+    const CONNECT_DISTANCE = 0.3;
     const SPEED = 0.002;
     const PULSE_SPEED = 0.5;
+
+    // Створюємо текстуру планети (коло з градієнтом)
+    const createPlanetTexture = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 64;
+      canvas.height = 64;
+      const ctx = canvas.getContext('2d');
+
+      // Градієнт
+      const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      gradient.addColorStop(0, '#ffaa00');
+      gradient.addColorStop(0.3, '#ff6600');
+      gradient.addColorStop(0.6, '#cc3300');
+      gradient.addColorStop(1, '#330000');
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(32, 32, 30, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Додамо кільця (опціонально)
+      ctx.strokeStyle = '#ffcc00';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.ellipse(32, 32, 28, 10, 0, 0, Math.PI * 2);
+      ctx.stroke();
+
+      return new THREE.CanvasTexture(canvas);
+    };
+
+    const planetTexture = createPlanetTexture();
 
     // Створюємо геометрію з частинок
     const particlesGeometry = new THREE.BufferGeometry();
     const positions = new Float32Array(PARTICLE_COUNT * 3);
     const colors = new Float32Array(PARTICLE_COUNT * 3);
     const sizes = new Float32Array(PARTICLE_COUNT);
-    const velocities = new Float32Array(PARTICLE_COUNT * 3); // швидкості для руху
+    const velocities = new Float32Array(PARTICLE_COUNT * 3);
 
-    // Палітра кольорів
+    // Палітра кольорів (для різних планет)
     const palette = [
-      new THREE.Color(0x3b82f6), // синій
-      new THREE.Color(0x60a5fa), // світло-синій
-      new THREE.Color(0x8b5cf6), // фіолетовий
-      new THREE.Color(0xec4899), // рожевий
-      new THREE.Color(0x10b981), // зелений
-      new THREE.Color(0xf59e0b), // жовтий
-      new THREE.Color(0xef4444), // червоний
+      new THREE.Color(0xffaa00),
+      new THREE.Color(0xff6600),
+      new THREE.Color(0xcc3300),
+      new THREE.Color(0x88aa00),
+      new THREE.Color(0x4488ff),
+      new THREE.Color(0xaa44ff),
     ];
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const i3 = i * 3;
-      // Випадкові позиції в кубі
       positions[i3] = (Math.random() - 0.5) * 10;
       positions[i3 + 1] = (Math.random() - 0.5) * 10;
       positions[i3 + 2] = (Math.random() - 0.5) * 10;
 
-      // Випадковий колір з палітри
       const color = palette[Math.floor(Math.random() * palette.length)];
       colors[i3] = color.r;
       colors[i3 + 1] = color.g;
       colors[i3 + 2] = color.b;
 
-      // Розмір
-      sizes[i] = 0.01 + Math.random() * 0.04;
+      sizes[i] = 0.05 + Math.random() * 0.1;
 
-      // Швидкість (випадковий напрямок)
       velocities[i3] = (Math.random() - 0.5) * SPEED;
       velocities[i3 + 1] = (Math.random() - 0.5) * SPEED;
       velocities[i3 + 2] = (Math.random() - 0.5) * SPEED;
@@ -70,36 +95,36 @@ function Background3D() {
     particlesGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
     const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.02,
+      size: 0.1,
+      map: planetTexture,
       vertexColors: true,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.9,
       blending: THREE.AdditiveBlending,
       sizeAttenuation: true,
+      depthWrite: false,
     });
 
     const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particlesMesh);
 
-    // Лінії між частинками
+    // Лінії між частинками (опціонально)
     const lineGeometry = new THREE.BufferGeometry();
-    const linePositions = new Float32Array(PARTICLE_COUNT * 3 * 2); // максимум
+    const linePositions = new Float32Array(PARTICLE_COUNT * 3 * 2);
     let lineCount = 0;
 
     const lineMaterial = new THREE.LineBasicMaterial({
       color: 0x3b82f6,
       transparent: true,
-      opacity: 0.15,
+      opacity: 0.1,
     });
 
     const lineMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
     scene.add(lineMesh);
 
-    // Зберігаємо посилання на позиції для швидкого доступу
     const posAttr = particlesGeometry.attributes.position;
     const sizeAttr = particlesGeometry.attributes.size;
 
-    // Анімація
     let animationId;
     const animate = () => {
       animationId = requestAnimationFrame(animate);
@@ -107,15 +132,12 @@ function Background3D() {
       const positionsArray = posAttr.array;
       const sizesArray = sizeAttr.array;
 
-      // Оновлюємо позиції частинок
       for (let i = 0; i < PARTICLE_COUNT; i++) {
         const i3 = i * 3;
-        // Рух
         positionsArray[i3] += velocities[i3];
         positionsArray[i3 + 1] += velocities[i3 + 1];
         positionsArray[i3 + 2] += velocities[i3 + 2];
 
-        // Відбивання від меж куба
         const bound = 5;
         for (let axis = 0; axis < 3; axis++) {
           if (positionsArray[i3 + axis] > bound) {
@@ -127,16 +149,15 @@ function Background3D() {
           }
         }
 
-        // Пульсація розміру
-        const baseSize = 0.01 + (i % 10) * 0.004; // різні базові розміри
-        const pulse = Math.sin(Date.now() * PULSE_SPEED + i) * 0.005;
-        sizesArray[i] = Math.max(0.005, baseSize + pulse);
+        const baseSize = 0.05 + (i % 10) * 0.01;
+        const pulse = Math.sin(Date.now() * PULSE_SPEED + i) * 0.02;
+        sizesArray[i] = Math.max(0.02, baseSize + pulse);
       }
 
       posAttr.needsUpdate = true;
       sizeAttr.needsUpdate = true;
 
-      // Оновлюємо лінії
+      // Лінії
       lineCount = 0;
       const linePosArray = lineGeometry.attributes.position?.array;
       if (linePosArray) {
@@ -169,13 +190,11 @@ function Background3D() {
         }
       }
 
-      // Оновлюємо геометрію ліній
       if (lineGeometry.attributes.position) {
         lineGeometry.attributes.position.needsUpdate = true;
         lineGeometry.setDrawRange(0, lineCount * 2);
       }
 
-      // Обертання всієї сцени (повільне)
       particlesMesh.rotation.x += 0.0002;
       particlesMesh.rotation.y += 0.0005;
 
@@ -183,7 +202,6 @@ function Background3D() {
     };
     animate();
 
-    // Обробка ресайзу
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -191,12 +209,10 @@ function Background3D() {
     };
     window.addEventListener('resize', handleResize);
 
-    // Реакція на рух миші
     const handleMouseMove = (event) => {
       const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
       const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
 
-      // Невелике зміщення камери
       camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
       camera.position.y += (mouseY * 0.5 - camera.position.y) * 0.05;
       camera.lookAt(0, 0, 0);
