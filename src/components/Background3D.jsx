@@ -20,40 +20,10 @@ function Background3D() {
     container.appendChild(renderer.domElement);
 
     // Параметри
-    const PARTICLE_COUNT = 300;
-    const CONNECT_DISTANCE = 0.3;
+    const PARTICLE_COUNT = 2000;
+    const CONNECT_DISTANCE = 0.15;
     const SPEED = 0.002;
     const PULSE_SPEED = 0.5;
-
-    // Створюємо текстуру планети (коло з градієнтом)
-    const createPlanetTexture = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = 64;
-      canvas.height = 64;
-      const ctx = canvas.getContext('2d');
-
-      // Градієнт
-      const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-      gradient.addColorStop(0, '#ffaa00');
-      gradient.addColorStop(0.3, '#ff6600');
-      gradient.addColorStop(0.6, '#cc3300');
-      gradient.addColorStop(1, '#330000');
-      ctx.fillStyle = gradient;
-      ctx.beginPath();
-      ctx.arc(32, 32, 30, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Додамо кільця (опціонально)
-      ctx.strokeStyle = '#ffcc00';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.ellipse(32, 32, 28, 10, 0, 0, Math.PI * 2);
-      ctx.stroke();
-
-      return new THREE.CanvasTexture(canvas);
-    };
-
-    const planetTexture = createPlanetTexture();
 
     // Створюємо геометрію з частинок
     const particlesGeometry = new THREE.BufferGeometry();
@@ -62,15 +32,8 @@ function Background3D() {
     const sizes = new Float32Array(PARTICLE_COUNT);
     const velocities = new Float32Array(PARTICLE_COUNT * 3);
 
-    // Палітра кольорів (для різних планет)
-    const palette = [
-      new THREE.Color(0xffaa00),
-      new THREE.Color(0xff6600),
-      new THREE.Color(0xcc3300),
-      new THREE.Color(0x88aa00),
-      new THREE.Color(0x4488ff),
-      new THREE.Color(0xaa44ff),
-    ];
+    // Синій колір (всі однакові)
+    const blueColor = new THREE.Color(0x3b82f6);
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const i3 = i * 3;
@@ -78,12 +41,12 @@ function Background3D() {
       positions[i3 + 1] = (Math.random() - 0.5) * 10;
       positions[i3 + 2] = (Math.random() - 0.5) * 10;
 
-      const color = palette[Math.floor(Math.random() * palette.length)];
-      colors[i3] = color.r;
-      colors[i3 + 1] = color.g;
-      colors[i3 + 2] = color.b;
+      // Всі сині
+      colors[i3] = blueColor.r;
+      colors[i3 + 1] = blueColor.g;
+      colors[i3 + 2] = blueColor.b;
 
-      sizes[i] = 0.05 + Math.random() * 0.1;
+      sizes[i] = 0.01 + Math.random() * 0.04;
 
       velocities[i3] = (Math.random() - 0.5) * SPEED;
       velocities[i3 + 1] = (Math.random() - 0.5) * SPEED;
@@ -95,20 +58,18 @@ function Background3D() {
     particlesGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
     const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.1,
-      map: planetTexture,
+      size: 0.02,
       vertexColors: true,
       transparent: true,
-      opacity: 0.9,
+      opacity: 0.8,
       blending: THREE.AdditiveBlending,
       sizeAttenuation: true,
-      depthWrite: false,
     });
 
     const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particlesMesh);
 
-    // Лінії між частинками (опціонально)
+    // Лінії між частинками
     const lineGeometry = new THREE.BufferGeometry();
     const linePositions = new Float32Array(PARTICLE_COUNT * 3 * 2);
     let lineCount = 0;
@@ -116,7 +77,7 @@ function Background3D() {
     const lineMaterial = new THREE.LineBasicMaterial({
       color: 0x3b82f6,
       transparent: true,
-      opacity: 0.1,
+      opacity: 0.15,
     });
 
     const lineMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
@@ -149,9 +110,9 @@ function Background3D() {
           }
         }
 
-        const baseSize = 0.05 + (i % 10) * 0.01;
-        const pulse = Math.sin(Date.now() * PULSE_SPEED + i) * 0.02;
-        sizesArray[i] = Math.max(0.02, baseSize + pulse);
+        const baseSize = 0.01 + (i % 10) * 0.004;
+        const pulse = Math.sin(Date.now() * PULSE_SPEED + i) * 0.005;
+        sizesArray[i] = Math.max(0.005, baseSize + pulse);
       }
 
       posAttr.needsUpdate = true;
