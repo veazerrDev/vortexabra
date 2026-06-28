@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import AdSection from './components/AdSection';
 import About from './components/About';
 import Projects from './components/Projects';
 import Social from './components/Social';
 import Footer from './components/Footer';
 import Background3D from './components/Background3D';
-import translations from './i18n';
+import { translations } from './i18n';
 import './App.css';
 
 function App() {
@@ -20,12 +21,11 @@ function App() {
     <div className="app">
       <Background3D />
       <Header lang={lang} setLang={setLang} t={t} />
-      <main>
-        <Hero t={t} />
-        <About t={t} />
-        <Projects t={t} />
-        <Social t={t} />
-      </main>
+      <Hero t={t} />
+      <AdSection />
+      <About t={t} />
+      <Projects t={t} />
+      <Social t={t} />
       <Footer />
     </div>
   );
