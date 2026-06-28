@@ -7,7 +7,7 @@ import Projects from './components/Projects';
 import Social from './components/Social';
 import Footer from './components/Footer';
 import Background3D from './components/Background3D';
-import { translations } from './i18n';
+import translations from './i18n';
 import './App.css';
 
 function App() {
