@@ -20,12 +20,12 @@ function App() {
   return (
     <div className="app">
       <Background3D />
-      <Header lang={lang} setLang={setLang} t={t} />
-      <Hero t={t} />
+      <Header lang={ lang } setLang={ setLang } t={ t } />
+      <Hero t={ t } />
+      <About t={ t } />
+      <Projects t={ t } />
       <AdSection />
-      <About t={t} />
-      <Projects t={t} />
-      <Social t={t} />
+      <Social t={ t } />
       <Footer />
     </div>
   );
