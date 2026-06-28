@@ -2,6 +2,7 @@ import telegram from '../assets/telegram.png';
 import discord from '../assets/discord.png';
 import youtube from '../assets/youtube.png';
 import tiktok from '../assets/tiktok.webp';
+import miysvit from '../assets/miysvit.png';
 
 function Social({ t }) {
   const items = [
@@ -9,6 +10,7 @@ function Social({ t }) {
     { icon: discord, name: 'Discord', url: 'https://disflip.com/guild/1509667234237382806' },
     { icon: youtube, name: 'YouTube', url: 'https://www.youtube.com/@Vortexabra' },
     { icon: tiktok, name: 'TikTok', url: 'https://www.tiktok.com/@vortex_abra' },
+    { icon: miysvit, name: 'MiySvit', url: 'https://www.miysvit.com/profile/vortexabra' },
   ];
 
   return (
